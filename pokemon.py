@@ -60,10 +60,20 @@ class Pokeball(pygame.sprite.Sprite):
             self.kill
 
 
+# calculate score based on time passed
+def get_game_score(start_time):
+    counting_time = int((pygame.time.get_ticks() - start_time) / 10)
+    return f"SCORE: {str(counting_time)}"
+
+
 pygame.mixer.init()
 pygame.init()
 
 pygame.display.set_caption("Pokeball Dodge")
+
+font = pygame.font.SysFont("monospace", 18)
+clock = pygame.time.Clock()
+game_start_time = pygame.time.get_ticks()
 
 # add background music johto
 pygame.mixer.music.load("music/Johto.mp3")
@@ -105,12 +115,15 @@ while running:
     # update player movement
     pressed_keys = pygame.key.get_pressed()
     player.update(pressed_keys)
-
     enemies.update()
 
     # screen.fill((0, 0, 0))
-
     screen.blit(background, (0, 0))
+
+    # update game score
+    score_string = get_game_score(game_start_time)
+    score_text = font.render(str(score_string), True, (0, 0, 0))
+    screen.blit(score_text, (0, 0))
 
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
