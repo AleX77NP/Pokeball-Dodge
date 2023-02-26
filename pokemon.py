@@ -62,8 +62,7 @@ class Pokeball(pygame.sprite.Sprite):
 
 # calculate score based on time passed
 def get_game_score(start_time):
-    counting_time = int((pygame.time.get_ticks() - start_time) / 10)
-    return f"SCORE: {str(counting_time)}"
+    return int((pygame.time.get_ticks() - start_time) / 10)
 
 
 pygame.mixer.init()
@@ -92,6 +91,7 @@ pygame.time.set_timer(ADDENEMY, 500)  # difficulty level?
 
 # init player
 player = Pokemon()
+player_score = 0
 
 enemies = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
@@ -121,8 +121,8 @@ while running:
     screen.blit(background, (0, 0))
 
     # update game score
-    score_string = get_game_score(game_start_time)
-    score_text = font.render(str(score_string), True, (0, 0, 0))
+    player_score = get_game_score(game_start_time)
+    score_text = font.render(f"SCORE: {str(player_score)}", True, (0, 0, 0))
     screen.blit(score_text, (0, 0))
 
     for entity in all_sprites:
