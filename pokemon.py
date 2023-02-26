@@ -63,6 +63,8 @@ class Pokeball(pygame.sprite.Sprite):
 pygame.mixer.init()
 pygame.init()
 
+pygame.display.set_caption("Pokeball Dodge")
+
 # add background music johto
 pygame.mixer.music.load("music/Johto.mp3")
 pygame.mixer.music.play(loops=-1)
@@ -76,7 +78,7 @@ background = pygame.image.load("images/field.jpg")
 # clock = pygame.time.Clock()
 
 ADDENEMY = pygame.USEREVENT + 1  # unique event id
-pygame.time.set_timer(ADDENEMY, 500) # difficulty level?
+pygame.time.set_timer(ADDENEMY, 500)  # difficulty level?
 
 # init player
 player = Pokemon()
@@ -107,7 +109,7 @@ while running:
     enemies.update()
 
     # screen.fill((0, 0, 0))
-    
+
     screen.blit(background, (0, 0))
 
     for entity in all_sprites:
